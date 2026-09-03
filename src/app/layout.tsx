@@ -9,7 +9,25 @@ import "./globals.css";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
+/**
+ * The absolute origin that relative URLs in metadata (the OG/Twitter image,
+ * canonical links) resolve against. `VERCEL_PROJECT_PRODUCTION_URL` is set by
+ * Vercel to the project's stable production domain — as opposed to
+ * `VERCEL_URL`, which is the URL of one specific deployment and changes on
+ * every deploy. Preferring it means renaming the project or attaching a custom
+ * domain later needs no code change here; `NEXT_PUBLIC_SITE_URL` is an escape
+ * hatch for a host that doesn't set either.
+ */
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Ledger — crypto market & portfolio tracker",
     template: "%s · Ledger",
