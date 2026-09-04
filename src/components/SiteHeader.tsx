@@ -25,7 +25,7 @@ export async function SiteHeader() {
             aria-hidden
             className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-accent text-[13px] font-bold text-accent-ink"
           >
-            ₿
+            L
           </span>
           <span className="hidden text-sm sm:inline">Ledger</span>
         </Link>
